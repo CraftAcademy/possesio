@@ -24,6 +24,7 @@ gem 'simple_form'
 gem 'title'
 gem 'uglifier'
 gem 'unicorn'
+gem 'devise'
 
 group :development do
   gem 'spring'
@@ -39,6 +40,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.1.0'
+  gem 'faker'
 end
 
 group :test do
