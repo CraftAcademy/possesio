@@ -7,6 +7,9 @@ development: &default
   pool: 2
   timeout: 5000
 
-test:
+test: &test
   <<: *default
   database: possesio_test
+
+cucumber:
+  <<: *test
