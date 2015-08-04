@@ -28,6 +28,7 @@ gem 'devise'
 gem 'invoicing'
 gem 'prawn'
 gem 'prawn-table'
+gem 'pdf-reader'
 
 group :development do
   gem 'spring'
@@ -55,6 +56,7 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'timecop'
   gem 'webmock'
+  gem 'pdf-inspector', require: 'pdf/inspector'
 end
 
 group :staging, :production do

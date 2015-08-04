@@ -1,4 +1,6 @@
 require 'rails_helper'
+#require 'invoicing/ledger_item/pdf_generator'
+require 'custom_invoice'
 
 RSpec.describe Invoice, type: :model do
   let(:product) { double(:product, name: 'T-Shirt', price: 10) }
@@ -29,6 +31,16 @@ RSpec.describe Invoice, type: :model do
   it 'assigns total' do
     add_line_item.call
     expect(subject.total_amount.to_i).to be 10
+  end
+
+  it 'generates a pdf invoice' do
+    add_line_item.call
+    pdf_creator = Invoicing::LedgerItem::PdfGenerator.new(subject)
+    pdf_creator.render_custom Rails.root.join("pdfs/#{customer.id}.pdf")
+    pdf_file = PDF::Reader.new(Rails.root.join("pdfs/#{customer.id}.pdf"))
+
+    expect(pdf_file.pages.first.text).to include product.name
+    expect(pdf_file.pages.first.text).to include product.name
   end
 end
 
