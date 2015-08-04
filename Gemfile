@@ -26,6 +26,8 @@ gem 'uglifier'
 gem 'unicorn'
 gem 'devise'
 gem 'invoicing'
+gem 'prawn'
+gem 'prawn-table'
 
 group :development do
   gem 'spring'
