@@ -5,7 +5,7 @@ require 'custom_invoice'
 RSpec.describe Invoice, type: :model do
   let(:product) { double(:product, name: 'T-Shirt', price: 10) }
   let(:customer) { FactoryGirl.create(:user) }
-  let(:organization) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
   let(:add_line_item) {
     Proc.new do
       subject.line_items.build(description: product.name,
@@ -22,7 +22,7 @@ RSpec.describe Invoice, type: :model do
     end
   }
 
-  subject { Invoice.new(sender: organization,
+  subject { Invoice.new(sender: user,
                         recipient: customer,
                         currency: 'kr') }
 
@@ -58,6 +58,15 @@ RSpec.describe Invoice, type: :model do
       pdf_file = PDF::Reader.new(Rails.root.join("pdfs/#{customer.id}.pdf"))
       expect(pdf_file.pages.first.text).to include product.name
     end
+  end
+
+  it '#current_user.invoices.create' do
+    invoice = user.invoices.create(recipient: customer, currency: 'SEK')
+    invoice.line_items.create(description: product.name,
+                             net_amount: product.price,
+                             tax_amount: 0)
+    expect(invoice.sender).to eql user
+    expect(invoice.line_items.first.description).to eql product.name
   end
 end
 
