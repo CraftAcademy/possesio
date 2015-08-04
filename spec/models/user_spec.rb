@@ -11,9 +11,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-
   describe 'Associations' do
-    #it { is_expected.to have_many :invoices }
+    it { is_expected.to have_many(:invoices).with_foreign_key 'sender_id' }
   end
 
   describe 'Database Schema' do
