@@ -15,7 +15,7 @@ class InvoicesController < ApplicationController
   def create
     recipient = User.find_or_create_by(first_name: invoice_params[:recipient])
     @invoice = current_user.invoices.create(recipient: recipient,
-                                    currency: invoice_params[:currency] )
+                                    currency: invoice_params[:currency] ? invoice_params[:currency] : 'SEK' )
     if @invoice.save
       redirect_to invoice_path(@invoice)
     else

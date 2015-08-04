@@ -38,6 +38,10 @@ RSpec.describe InvoicesController, :type => :controller do
     it 'renders show' do
       expect(response).to render_template(:show)
     end
+
+    it 'assigns invoice to @invoice' do
+      expect(assigns(:invoice)).to eql invoice
+    end
   end
 
   describe 'GET new' do
