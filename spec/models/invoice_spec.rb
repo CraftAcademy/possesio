@@ -48,5 +48,16 @@ RSpec.describe Invoice, type: :model do
     expect(pdf_file.pages.first.text).to include product.name
     expect(pdf_file.pages.first.text).to include product.name
   end
+
+  context '#create_pdf' do
+    it { is_expected.to respond_to :create_pdf}
+
+    it 'creates pdf file' do
+      add_line_item.call
+      subject.create_pdf
+      pdf_file = PDF::Reader.new(Rails.root.join("pdfs/#{customer.id}.pdf"))
+      expect(pdf_file.pages.first.text).to include product.name
+    end
+  end
 end
 
