@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  subject { FactoryGirl.build(:user) }
+
   describe 'Fixtures' do
     it 'should have valid User Factory' do
       expect(FactoryGirl.create(:user)).to be_valid
@@ -26,7 +28,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Validation' do
-    subject { FactoryGirl.build(:user) }
     #it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_presence_of :email }
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
@@ -36,5 +37,9 @@ RSpec.describe User, type: :model do
 
   context 'instance methods' do
     it { is_expected.to respond_to :name }
+
+    it 'returns #name' do
+      expect(subject.name).to eql [subject.first_name, subject.last_name].join(' ')
+    end
   end
 end
