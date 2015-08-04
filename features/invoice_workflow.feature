@@ -7,7 +7,11 @@ Feature: creating and maintaining invoices
     Given I'm logged in as an user
 
   Scenario: Create an invoice
-
+    Given I am on the "home" page
+    Then I should see "Create new invoice"
+    #And I fill
+    And I click "New invoice"
+    Then show me the page
 
   Scenario: Access (read) an invoice
 

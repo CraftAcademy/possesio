@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :invoices, foreign_key: 'sender_id'
+
+  def name
+    [self.first_name, self.last_name].join(' ')
+  end
 end

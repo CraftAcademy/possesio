@@ -1,0 +1,11 @@
+<h1>Invoices#new</h1>
+<p>Find me in app/views/invoices/new.html.erb</p>
+
+
+<%= form_for @invoice do |f| %>
+    <%= f.text_field :recipient, value: params[:invoice][:recipient] %>
+    <%= f.submit 'Create' %>
+
+<% end %>
+
+

@@ -16,7 +16,8 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Database Schema' do
-    #it { is_expected.to have_db_column :name }
+    it { is_expected.to have_db_column :first_name }
+    it { is_expected.to have_db_column :last_name }
     it { is_expected.to have_db_column :email }
     #it { is_expected.to have_db_column :is_admin }
     # Timestamps
@@ -31,5 +32,9 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
     it { is_expected.to allow_value('a@a.com', 'a@1b.net').for(:email) }
     it { is_expected.to_not allow_value('a@a', 'a@1b,net', '!d@e.se', 'd@a!.s0').for(:email) }
+  end
+
+  context 'instance methods' do
+    it { is_expected.to respond_to :name }
   end
 end
