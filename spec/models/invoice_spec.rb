@@ -15,6 +15,13 @@ RSpec.describe Invoice, type: :model do
     end
   }
 
+  let(:create_pdf) {
+    Proc.new do
+      pdf_creator = Invoicing::LedgerItem::PdfGenerator.new(subject)
+      pdf_creator.render_custom Rails.root.join("pdfs/#{customer.id}.pdf")
+    end
+  }
+
   subject { Invoice.new(sender: organization,
                         recipient: customer,
                         currency: 'kr') }
@@ -35,10 +42,9 @@ RSpec.describe Invoice, type: :model do
 
   it 'generates a pdf invoice' do
     add_line_item.call
-    pdf_creator = Invoicing::LedgerItem::PdfGenerator.new(subject)
-    pdf_creator.render_custom Rails.root.join("pdfs/#{customer.id}.pdf")
-    pdf_file = PDF::Reader.new(Rails.root.join("pdfs/#{customer.id}.pdf"))
+    create_pdf.call
 
+    pdf_file = PDF::Reader.new(Rails.root.join("pdfs/#{customer.id}.pdf"))
     expect(pdf_file.pages.first.text).to include product.name
     expect(pdf_file.pages.first.text).to include product.name
   end

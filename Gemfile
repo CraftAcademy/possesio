@@ -28,7 +28,7 @@ gem 'devise'
 gem 'invoicing'
 gem 'prawn'
 gem 'prawn-table'
-gem 'pdf-reader'
+gem 'pdf-reader' #https://github.com/yob/pdf-reader
 
 group :development do
   gem 'spring'
