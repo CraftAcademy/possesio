@@ -1,4 +1,16 @@
-<h1>Logged in as <%= @user.email %></h1>
+<ul>
+  <% if user_signed_in? %>
+      <li>
+        <h1>Logged in as <%= @user.email %></h1>
+      </li>
+      <li>
+        <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+      </li>
+  <% else %>
+      <li>
+        <%= link_to('Login', new_user_session_path) %>
+      </li>
+  <% end %></ul>
 <h3>Create new invoice</h3>
 <%= form_for Invoice.new do |f| %>
     <%= f.text_field :recipient %>
