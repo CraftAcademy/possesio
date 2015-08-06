@@ -1,16 +1,7 @@
-<ul>
-  <% if user_signed_in? %>
-      <li>
-        <h1>Logged in as <%= @user.email %></h1>
-      </li>
-      <li>
-        <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-      </li>
-  <% else %>
-      <li>
-        <%= link_to('Login', new_user_session_path) %>
-      </li>
-  <% end %></ul>
+<% if current_user.invoices.any? %>
+    <h3>My invoices (<%= current_user.invoices.count  %>)</h3>
+
+<% end %>
 <h3>Create new invoice</h3>
 <%= form_for Invoice.new do |f| %>
     <%= f.text_field :recipient %>
@@ -18,3 +9,5 @@
     <%= f.submit 'New invoice' %>
 
 <% end %>
+
+<%#= render 'invoices/template' %>

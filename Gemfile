@@ -29,6 +29,7 @@ gem 'invoicing'
 gem 'prawn'
 gem 'prawn-table'
 gem 'pdf-reader' #https://github.com/yob/pdf-reader
+#https://github.com/Invoicebus/html-invoice-generator
 
 group :development do
   gem 'spring'
