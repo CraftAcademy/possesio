@@ -9,9 +9,11 @@ Feature: creating and maintaining invoices
   Scenario: Create an invoice
     Given I am on the "home" page
     Then I should see "Create new invoice"
-    #And I fill
+    And I fill in "invoice_recipient" with "Thomas Ochman"
+    And I select "SEK" from "invoice_currency"
     And I click "New invoice"
-    Then show me the page
+    Then I should be o
+    #Then show me the page
 
   Scenario: Access (read) an invoice
 

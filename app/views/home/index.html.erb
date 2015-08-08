@@ -5,7 +5,7 @@
 <h3>Create new invoice</h3>
 <%= form_for Invoice.new do |f| %>
     <%= f.text_field :recipient %>
-
+    <%= f.select :currency, %w(SEK USD GBP) %>
     <%= f.submit 'New invoice' %>
 
 <% end %>

@@ -19,3 +19,11 @@ Given /^I am not logged in$/ do
     Capybara.current_driver = current_driver
   end
 end
+
+When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
+  fill_in field.downcase, with: value
+end
+
+When /^I select "(.*?)" from "(.*?)"$/ do |option, field|
+  page.select option, from: field.downcase
+end
